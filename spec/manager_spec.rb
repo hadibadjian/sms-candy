@@ -2,35 +2,53 @@ require 'spec_helper'
 
 RSpec.describe SmsCandy::Manager do
 
+  include CommonMethods
+
   let(:subject) { SmsCandy::Manager }
 
   it "should respond to send_sms" do
     expect(subject).to respond_to(:send_sms)
   end
 
-  context "send SMS" do
+  it "should respond to message_status" do
+    expect(subject).to respond_to(:message_status)
+  end
 
-    context "authenticated" do
+  it "should respond to message_response" do
+    expect(subject).to respond_to(:message_response)
+  end
 
-      let(:send_sms) { subject.send_sms("0400000000", "lorem ipsum") }
+  context "send sms" do
 
-      before(:each) do
-        SmsCandy::Authentication::Strategies.add :oauth2, SmsCandy::Authentication::Strategies::OAuth2
-      end
+    it "should return message id" do
+      expect(subject.send_sms("0400000000", "Lorem ipsum")).not_to be_nil
+    end
 
-      after(:each) do
-        SmsCandy::Authentication::Strategies.clear!
-      end
+  end
 
-      it "should return the message id" do
-        expect(send_sms).not_to be_nil
-      end
+  context "message status" do
 
-      it "should track send messages" do
-        send_sms
-        expect(subject.message_ids.count).to eql(1)
-      end
+    it "should return message details" do
+      message_id = send_sms
+      expect(subject.message_status(message_id)).not_to be_nil
+    end
 
+  end
+
+  context "message response" do
+
+    it "should return message response" do
+      message_id = send_sms
+      expect(subject.message_response(message_id)).not_to be_nil
+    end
+
+  end
+
+  context "message response callbacks" do
+
+    it "should render response callbacks" do
+      message = message_callback
+      expect(subject.message_callback(message)).not_to be_nil
     end
 
   end

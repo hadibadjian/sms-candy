@@ -5,24 +5,24 @@ module SmsCandy
     module Strategies
 
       class << self
-        def add(label, strategy = nil)
-          strategy ||= Class.new(SmsCandy::Authentication::Strategies::OAuth2)
 
-          unless strategy.method_defined?(:authenticate!)
+        def add(label, strategy = nil)
+          strategy ||= SmsCandy::Authentication::Strategies::OAuth2.new
+
+          unless strategy.class.method_defined?(:authenticate!)
             raise NoMethodError, "authenticate! is not declared in the #{label.inspect} strategy"
           end
 
-          _strategies[label] = strategy
+          strategies[label] = strategy
         end
 
         def clear!
-          _strategies.clear
+          strategies.clear
         end
 
-        private
-          def _strategies
-            @strategies ||= {}
-          end
+        def strategies
+          @strategies ||= {}
+        end
 
       end
 

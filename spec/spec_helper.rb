@@ -4,6 +4,7 @@ require 'simplecov'
 
 require File.expand_path("../../spec/dummy/config/environment.rb",  __FILE__)
 require 'sms_candy'
+require 'helpers/common_methods'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

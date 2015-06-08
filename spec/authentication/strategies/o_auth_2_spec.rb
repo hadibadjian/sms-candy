@@ -23,7 +23,6 @@ RSpec.describe SmsCandy::Authentication::Strategies::OAuth2 do
     end
 
     it "should get valid access_token" do
-      p subject.access_token
       expect(subject.access_token).not_to be_nil
     end
 

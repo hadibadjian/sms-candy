@@ -10,7 +10,6 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-annotate'
-  gem 'sqlite3'
 end
 
 group :test do
