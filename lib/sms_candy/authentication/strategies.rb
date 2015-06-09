@@ -13,16 +13,22 @@ module SmsCandy
             raise NoMethodError, "authenticate! is not declared in the #{label.inspect} strategy"
           end
 
-          strategies[label] = strategy
+          _strategies[label] = strategy
         end
 
         def clear!
-          strategies.clear
+          _strategies.clear
         end
 
-        def strategies
-          @strategies ||= {}
+        def list
+          _strategies
         end
+
+        private
+
+          def _strategies
+            @strategies ||= {}
+          end
 
       end
 

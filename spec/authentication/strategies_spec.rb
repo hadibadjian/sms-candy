@@ -1,5 +1,8 @@
 require 'spec_helper'
 
+class InvalidStrategyWithoutAuthenticate
+end
+
 RSpec.describe SmsCandy::Authentication::Strategies do
 
   let(:subject) { SmsCandy::Authentication::Strategies }
@@ -9,13 +12,27 @@ RSpec.describe SmsCandy::Authentication::Strategies do
     SmsCandy::Authentication::Strategies.clear!
   end
 
-  it "should add new strategies" do
-    expect(subject.add :oauth2, strategy).to eql(strategy)
+  context "#add" do
+
+    it "should add new strategies" do
+      expect(subject.add :oauth2, strategy).to eql(strategy)
+    end
+
+    it "should fail adding a strategy without authenticate! method" do
+      expect {
+        subject.add :invalid_strategy, InvalidStrategyWithoutAuthenticate.new
+      }.to raise_error
+    end
+
   end
 
-  it "should be able to clear strategies" do
-    subject.add :oauth2, strategy
-    expect(subject.clear!).to eql({})
+  context "#clear!" do
+
+    it "should be able to clear strategies" do
+      subject.add :oauth2, strategy
+      expect(subject.clear!).to eql({})
+    end
+
   end
 
 end

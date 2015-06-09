@@ -5,8 +5,8 @@ module SmsCandy
     module Strategies
 
       class OAuth2
-        attr_accessor :access_token
-        attr_accessor :expires_at
+        attr_reader :access_token
+        attr_reader :expires_at
 
         #Obtain these keys from the Telstra Developer Portal
         # APP_KEY="yourapikey"

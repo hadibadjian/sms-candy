@@ -21,13 +21,7 @@ module SmsCandy
         private
 
           def _access_token
-            SmsCandy::Authentication::Strategies.add(:oauth2) if SmsCandy::Authentication::Strategies.strategies.empty?
-
-            access_token = nil
-            SmsCandy::Authentication::Strategies.strategies.each { |l,s| access_token = s.access_token and return if s.access_token }
-
-            access_token = SmsCandy::Authentication::Strategies.strategies.map { |l,s| s.authenticate! }.first if access_token.nil?
-            access_token
+            SmsCandy::Authentication::Manager.access_token
           end
 
       end

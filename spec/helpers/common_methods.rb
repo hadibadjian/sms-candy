@@ -1,7 +1,7 @@
 module CommonMethods
 
   def authenticate
-    SmsCandy::Authentication::Strategies::OAuth2.new.authenticate!
+    SmsCandy::Authentication::Manager.access_token
   end
 
   def send_sms(number = "0400000000")
