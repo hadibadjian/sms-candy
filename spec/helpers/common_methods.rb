@@ -1,8 +1,8 @@
 module CommonMethods
 
-  # def authenticate
-  #   SmsCandy::Authentication::Strategies::OAuth2.new.authenticate!
-  # end
+  def authenticate
+    SmsCandy::Authentication::Strategies::OAuth2.new.authenticate!
+  end
 
   def send_sms(number = "0400000000")
     SmsCandy::Helpers::MessageDelivery.send_sms(number, "Lorem ipsum")
