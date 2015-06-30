@@ -4,16 +4,24 @@ module SmsCandy
 
     class << self
 
-      def send_sms(number, message)
-        SmsCandy::Helpers::MessageDelivery.send_sms(number, message)
+      def authenticate
+        access_token = nil
+        SmsCandy::Authentication::Strategies.list.each do |label, strategy|
+          access_token = strategy.authenticate!
+          return access_token if access_token
+        end
       end
 
-      def message_status(message_id)
-        SmsCandy::Helpers::MessageDelivery.status(message_id)
+      def send_sms(number, message, access_token)
+        SmsCandy::Helpers::SendMessageHelper.send_sms(number, message, access_token)
       end
 
-      def message_response(message_id)
-        SmsCandy::Helpers::MessageDelivery.response(message_id)
+      def message_status(message_id, access_token)
+        SmsCandy::Helpers::GetMessageStatusHelper.status(message_id, access_token)
+      end
+
+      def message_response(message_id, access_token)
+        SmsCandy::Helpers::GetMessageResponseHelper.response(message_id, access_token)
       end
 
       def message_callback(message)
