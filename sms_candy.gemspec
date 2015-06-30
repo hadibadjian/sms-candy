@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.name        = "sms_candy"
   s.version     = SmsCandy::VERSION
   s.authors     = ["Hadi Badjian"]
-  s.email       = ["contact@meancandy.com"]
-  s.homepage    = "http://meancandy.com/sms"
-  s.summary     = "Summary of SmsCandy."
-  s.description = "Description of SmsCandy."
+  s.email       = ["info@smscandy.com"]
+  s.homepage    = "http://smscandy.com"
+  s.summary     = "Basic gem for Telstra SMS API."
+  s.description = "The sms_candy gem uses Telstra API to send SMS messages to Australian mobile phones. It also allows you to receive messages, check for message status and get the message responses."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
