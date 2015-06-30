@@ -5,7 +5,6 @@ module SmsCandy
     class << self
 
       def authenticate
-        access_token = nil
         SmsCandy::Authentication::Strategies.list.each do |label, strategy|
           access_token = strategy.authenticate!
           return access_token if access_token
